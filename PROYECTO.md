@@ -8,20 +8,20 @@ Este es un archivo que debe completarse con los datos utilizados en el TPI. Este
 
 El proyecto será un generador de playlists automático. Esta se basará en distintos tipos de información.
 Si lo ingresado es una canción:
-*El análisis de los datos de una canción base (ingresada por el usuario): Género, Artista, Popularidad, “Mood” (estado de ánimo), otros.
-*El análisis de las playlists públicas de otros usuarios en donde se encuentre dicha canción
-*El análisis del audio de la canción en sí: tonalidad (mayor o menor), tono, otros (opcional). 
+* El análisis de los datos de una canción base (ingresada por el usuario): Género, Artista, Popularidad, “Mood” (estado de ánimo), otros.
+* El análisis de las playlists públicas de otros usuarios en donde se encuentre dicha canción
+* El análisis del audio de la canción en sí: tonalidad (mayor o menor), tono, otros (opcional). 
 
 Si lo ingresado es un artista:
-*El análisis de los géneros producidos por el artista. 
+* El análisis de los géneros producidos por el artista. 
 
 Si lo ingresado es un género:
-*El análisis de artistas que produzcan música de dicho género
-*El análisis de géneros similares
+* El análisis de artistas que produzcan música de dicho género
+* El análisis de géneros similares
 
 Si lo ingresado es un estado de ánimo:
-*El análisis de géneros que representen dicho estado de ánimo
-*Comparación de audio de canciones reconocidas bajo dicho ánimo, en base a playlist automáticas (opcional)
+* El análisis de géneros que representen dicho estado de ánimo
+* Comparación de audio de canciones reconocidas bajo dicho ánimo, en base a playlist automáticas (opcional)
 
 
 ## Modelo de Dominio
