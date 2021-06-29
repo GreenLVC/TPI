@@ -26,11 +26,12 @@ Si lo ingresado es un estado de ánimo:
 
 ## Modelo de Dominio
 
-Insertar el modelo de dominio aquí.
+https://viewer.diagrams.net/?page-id=C5RBs43oDa-KdzZeNtuy&highlight=0000ff&edit=_blank&layers=1&nav=1#G1uU_qCRekmWq6l-pEqVN5Ul_ehPFLUa7U
 
 ## Bosquejo de Arquitectura
 
-Definir la arquitectura del sistema y como interactuan sus diferentes componentes. Utilizar el Paquete **Office** de Draw.io o similar. [Ejemplo Online]().
+https://34u501.axshare.com/#id=7v3fzm&p=home
+
 
 ## Requerimientos
 
@@ -92,6 +93,7 @@ Listado y descripción breve de los requerimientos no funcionales. Utilizar las 
 ## Stack Tecnológico
 
 Definir que tecnologías se van a utilizar en cada capa y una breve descripción sobre por qué se escogió esa tecnologia.
+https://viewer.diagrams.net/?page-id=d_5rEiqRbLu9tku_2uIN&highlight=0000ff&edit=_blank&layers=1&nav=1&page-id=d_5rEiqRbLu9tku_2uIN#G1uU_qCRekmWq6l-pEqVN5Ul_ehPFLUa7U
 
 ### Capa de Datos
 
@@ -100,7 +102,14 @@ Definir que base de datos, ORM y tecnologías se utilizaron y por qué.
 ### Capa de Negocio
 
 Definir que librerías e integraciones con terceros se utilizaron y por qué. En caso de consumir APIs, definir cúales se usaron.
+Se utilizan las librerías:
+ * SpotiPy
+ * Pandas (?
+ * PyAudioAnalysis (si llegamos
+ * Orange
+
+También utiliza Spotify API
 
 ### Capa de Presentación
 
-Definir que framework se utilizó y por qué.
+El framework utilizado es flask debido a que ninguno de los integrantes tenía experiencia con frameworks y a través de investigación y recomendaciones nos pareció lo suficientemente simple.
