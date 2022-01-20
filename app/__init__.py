@@ -1,4 +1,4 @@
-from flask import flask
+from flask import Flask
 from config import Config
 from .database.contact_db import reset_table
 
@@ -13,3 +13,6 @@ app.register_blueprint(api_scope, url_prefix="/api")
 app.register_blueprint(errors_scope, url_prefix="/")
 
 reset_table()
+
+if __name__ == "__main__":
+    app.run(debug=True)
