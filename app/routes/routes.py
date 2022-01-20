@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template
 
-global_scope = Blueprint("vies", __name__)
+global_scope = Blueprint("views", __name__)
 
 """
 aquí habría que declarar todos los objetos que vamos a utilizar, algunos ejemplos:

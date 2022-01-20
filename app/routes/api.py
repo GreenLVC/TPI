@@ -7,7 +7,8 @@ from ..models.models import Contact
 api_scope = Blueprint("api", __name__)
 
 """
-aquí se modelarían las clases pero para la capa de presentación, por ejemplo:
+aquí se modelarían las clases pero para la capa de presentación, en este caso
+se usarían solo para la página api, por ejemplo:
 
 @api_scope.route('/contacts', methods=['GET'])
 def get_list():

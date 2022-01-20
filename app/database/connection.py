@@ -14,6 +14,8 @@ DATABASE_PATH = Config.DATABASE_PATH
 def __get_cursor() -> Iterator[sqlite3.Cursor]:
     connection: sqlite3.Connection = sqlite3.connect(DATABASE_PATH)
     cursor: sqlite3.Cursor = connection.cursor()
+
+    #ojo porque lo anterior es solo para sqlite
     try:
         yield cursor
         connection.commit()

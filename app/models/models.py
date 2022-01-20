@@ -11,3 +11,11 @@ class Contact(NamedTuple):
     ... etc
     
 """
+
+class Usuario(NamedTuple):
+    id: Optional[int] = None
+    alias: Optional[str] = None
+    email: Optional[str] = None
+    contrasenia: Optional[str] = None
+    link_foto: Optional[str] = None
+    cuenta_spotify: Optional[str] = None

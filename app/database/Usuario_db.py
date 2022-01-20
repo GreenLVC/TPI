@@ -1,18 +1,14 @@
 from typing import List
 
 from .connection import _fetch_all, _fetch_lastrow_id, _fetch_none, _fetch_one
-from ..models.models import Contact
-from ..models.exceptions import UserAlreadyExists, UserNotFound
+from ..models.models import Usuario
+from ..models.exceptions import UsuarioExistente, UsuarioInexistente
 
 from faker import Faker 
 
 
-
-"""
-Acá copiaría y pegaría todo en todas las clases
-
-def create(contact: Contact) -> Contact:
-    if user_exists("email", contact.email):
+def create(usuario: Usuario) -> Contact:
+    if user_exists("email", usuario.email):
         raise UserAlreadyExists(f"Email {contact.email} is already used")
 
     query = """INSERT INTO contacts VALUES (:first_name, :last_name,
