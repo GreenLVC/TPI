@@ -8,7 +8,7 @@ class UsuarioData(DataBase):
     def __init__(self):
         super().__init__()
 
-    def GetOne(self, nombre, contrasenia) -> Optional[Usuario]:
+    def GetOne(self, nombre:str , contrasenia:str) -> Optional[Usuario]:
         self.open()
         try:
             self.cursor.execute(
@@ -41,7 +41,7 @@ class UsuarioData(DataBase):
             self.cursor.close()
             self.close()
 
-    def register(self, usuario: Usuario) -> bool:
+    def Registrar(self, usuario: Usuario) -> None:
         insertcmd = "insert into usuarios(alias, contrasenia, foto_perfil, pais, idCuenta) values (%s, %s, %s, %s, %s)"
         self.open()
         try:
@@ -55,7 +55,7 @@ class UsuarioData(DataBase):
             self.cursor.close()
             self.close()
 
-    def update(self, user: Usuario) -> bool:
+    def Modificar(self, user: Usuario) -> None:
         updt = "update usuarios set contrasenia= %s, alias= %s, foto_perfil= %s, pais= %s , idCuenta =%s where alias= %s and contrasenia =%"
         params = (user.contrasenia, user.alias,
                   user.foto_perfil, user.pais, user.id_cuenta, user.alias, user.contrasenia)

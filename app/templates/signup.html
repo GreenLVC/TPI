@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+<div class="container w-75 bg-primary shadow mt-5 mb-5">
+    <div class="row align-items-stretch">
+        <div class="col bg d-none d-lg-block col-md-5 col-lg-5 col-xl-6">
+
+        </div>
+
+        <div class="col bg-white p-5">
+            <div class="text-end">
+                <img src="/static/img/logo-Placeholder.png" width="48" alt="Logo de la web">
+            </div>
+            <h2 class="fw-bold text-left my-3">Únete a la comunidad</h2>
+
+            <form class='form-signup' method='POST' action="/signup">
+                {{ form.hidden_tag() }} <br>
+                <div class="mb-2">
+                    {{ wtf.form_field(form.username, placeholder="Alias") }} <br>
+                </div>
+                <div class="mb-2">
+                    {{ wtf.form_field(form.email, placeholder="Correo electrónico")}}<br>
+                </div>
+                <div class="mb-2">
+                    {{ wtf.form_field(form.password, placeholder="Contaseña") }}<br>
+                </div>
+                <div class="mb-2">
+                    {{ wtf.form_field(form.password_rep, placeholder="Repetir contraseña") }}<br>
+                </div>
+                <div class="col mb-2">
+                    <button type="submit" class="btn btn-primary w-100">Registrarse
+                    </button>
+                </div>
+
+            </form>
+
+            <div class="py-2">
+                <span>¿Ya estas registrado? <a href="{{url_for('login')}}">Iniciar sesión</a></span>
+                <div class="col py-3">
+                    <button class="btn btn-outline-secondary">
+                        <div class="row align-items-center">
+                            <div class="col-2 d-none d-md-block">
+                                <img src="/static/img/spotify.png" width="32" alt="Logo de spotify">
+                            </div>
+                            <div class="col-10">Registrarse con Spotify</div>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
