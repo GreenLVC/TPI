@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, url_for, flash, redirect, session
 from flask_bootstrap import Bootstrap
 from flask_login import login_required, logout_user
-from forms import LoginForm, SignupForm
+from .forms import SignupForm, LoginForm
 from flask_mysqldb import MySQL
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
@@ -17,8 +17,8 @@ TOKEN_INFO = "token_info"
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '630667'
-app.config['MYSQL_DB'] = 'login'
+app.config['MYSQL_PASSWORD'] = '1234'
+app.config['MYSQL_DB'] = 'myplaylists'
 
 mysql = MySQL(app)
 
