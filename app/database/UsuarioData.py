@@ -1,6 +1,6 @@
 import pymysql
 from database.connection import DataBase
-from models import Usuario
+from models.models import Usuario
 from typing import List, Optional
 
 
@@ -41,7 +41,7 @@ class UsuarioData(DataBase):
             self.cursor.close()
             self.close()
 
-    def Registrar(self, usuario: Usuario) -> None:
+    def Registrar(self, usuario: Usuario) -> bool:
         insertcmd = "insert into usuarios(alias, contrasenia, foto_perfil, pais, idCuenta) values (%s, %s, %s, %s, %s)"
         self.open()
         try:
@@ -55,7 +55,7 @@ class UsuarioData(DataBase):
             self.cursor.close()
             self.close()
 
-    def Modificar(self, user: Usuario) -> None:
+    def Modificar(self, user: Usuario) -> bool:
         updt = "update usuarios set contrasenia= %s, alias= %s, foto_perfil= %s, pais= %s , idCuenta =%s where alias= %s and contrasenia =%"
         params = (user.contrasenia, user.alias,
                   user.foto_perfil, user.pais, user.id_cuenta, user.alias, user.contrasenia)
