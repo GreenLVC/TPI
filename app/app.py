@@ -17,7 +17,7 @@ TOKEN_INFO = "token_info"
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = '1234'
+app.config['MYSQL_PASSWORD'] = '1208'
 app.config['MYSQL_DB'] = 'myplaylists'
 
 mysql = MySQL(app)
@@ -45,7 +45,7 @@ def signup():
         email = request.form['email']
         password = request.form['password']
         cur = mysql.connection.cursor()
-        cur.execute('INSERT INTO usuario (username, email, password) VALUES (%s, %s, MD5(%s))', (username, email, password))
+        cur.execute('INSERT INTO usuarios (alias, email, contrasenia) VALUES (%s, %s, MD5(%s))', (username, email, password))
         mysql.connection.commit()
         return redirect(url_for('index'))
     return render_template('signup.html', form=form)
@@ -62,12 +62,12 @@ def logout():
 
 @app.route('/main')
 def main():
-    sp_oaut = create_spotify_oauth()
-    session.clear()
-    code = request.args.get('code')
-    token_info = sp_oaut.get_access_token(code)
-    session[TOKEN_INFO] = token_info
-    return redirect(url_for('main', _external=True))
+    # sp_oaut = create_spotify_oauth()
+    # session.clear()
+    # code = request.args.get('code')
+    # token_info = sp_oaut.get_access_token(code)
+    # session[TOKEN_INFO] = token_info
+    return render_template('main.html')
 
 
 def create_spotify_oauth():
