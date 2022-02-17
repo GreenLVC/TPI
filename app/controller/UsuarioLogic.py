@@ -1,6 +1,6 @@
 from typing import List
-from database import UsuarioData
-from models.models import Usuario
+from ..database import UsuarioData
+from app.models.models import Usuario
 from helpers import helper
 
 
@@ -8,8 +8,8 @@ class UsuarioLogic:
     def __init__(self):
         self.datasource = UsuarioData()
 
-    def GetOne(self, nombre:str, contrasenia: str) -> Optional[Usuario]:
-        usuario=self.datasource.GetOne(nombre, contrasenia)
+    def GetOne(self, email:str, contrasenia: str) -> Optional[Usuario]:
+        usuario=self.datasource.GetOne(email, contrasenia)
         return usuario
 
     def GetAll(self) -> List[Usuario]:
