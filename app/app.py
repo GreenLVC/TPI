@@ -90,8 +90,8 @@ def userprofile():
 def create_spotify_oauth():
     return SpotifyOAuth(
         client_id='29f753bf79c244d4a27965c1ae47946a',
-        client_secret='',  #Esto NO tiene que quedar guardado en git
-        redirect_uri=url_for('main', _external=True),
+        client_secret='683f0860d10c49e3a3359242169fae7b',  #Esto NO tiene que quedar guardado en git
+        redirect_uri=url_for('main.html', _external=True),
         scope='user-read-private user-read-email user-library-read playlist-modify-private playlist-read-private'
     )
 
