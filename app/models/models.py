@@ -16,7 +16,7 @@ class Album():
         self.nombre = nombre
         self.fechaSalida = fechaSalida
 
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id ,self.nombre, self.fechaSalida
 
 
@@ -27,7 +27,7 @@ class Artista():
         self.popularidad = popularidad
         self.tipo_artista = tipo_artista
 
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id, self.nombre, self.popularidad, self.tipo_artista
 
 class Cancion():
@@ -44,7 +44,7 @@ class Cancion():
         self.tipo_cancion = tipo_cancion
         self.idAlbum = idAlbum
     
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id, self.titulo, self.pista, self.mood, self.duracion, self.reproducciones, self.explicita,
         self.popularidad, self.tipo_cancion, self.idAlbum
 
@@ -56,7 +56,7 @@ class Cuenta():
         self.display_name = display_name
         self.tipo_cuenta = tipo_cuenta
 
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id, self.email, self.explicito, self.display_name, self.tipo_cuenta
 
 class Genero_Cancion():
@@ -69,7 +69,7 @@ class Genero_Cancion():
         self.artista_principal = artista_principal
         self.fecha_publicacion = fecha_publicacion
 
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id, self.id_artista, self.id_cancion, self.id_genero, 
         self.artista_principal, self.fecha_publicacion
     
@@ -80,7 +80,7 @@ class Genero():
         self.descripcion = descripcion
         self.id_sub_genero = id_sub_genero
 
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id, self.nombre, self.descripcion, self.id_sub_genero
 
 class Playlist_Cancion():
@@ -91,7 +91,7 @@ class Playlist_Cancion():
         self.total = total
         self.limite = limite
 
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id, self.id_playlist, self.id_cancion, self.total, self.limite
 
 class Playlist():
@@ -101,7 +101,7 @@ class Playlist():
         self.fecha_creacion = fecha_creacion
         self.privacidad = privacidad
 
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id, self.nombre, self.fecha_creacion, self.privacidad
 
 class UsuarioPlaylist():
@@ -114,7 +114,7 @@ class UsuarioPlaylist():
         self.fecha_eliminacion = fecha_eliminacion
         self.fecha_modificacion = fecha_modificacion
 
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id, self.id_usuario, self.id_playlist, self.tipo_usuario, self.fecha_uso, self.fecha_modificacion, self.fecha_eliminacion
 
 class Usuario():
@@ -127,5 +127,5 @@ class Usuario():
         self.id_cuenta = id_cuenta
         self.email = email
 
-    def lst(self) -> Tuple:
+    def lst(self) -> tuple:
         return self.id, self.alias, self.contrasenia, self.foto_perfil, self.pais, self.id_cuenta, self.email

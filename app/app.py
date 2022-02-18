@@ -3,10 +3,11 @@ from flask_bootstrap import Bootstrap
 from flask_login import UserMixin, login_required, logout_user, LoginManager, login_required, current_user
 from .forms import SignupForm, LoginForm
 from flask_mysqldb import MySQL
+from app import controller, database
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
 import time
-from app.controller.UsuarioLogic import GetOne
+
 
 app = Flask(__name__)
 Bootstrap(app)
