@@ -1,10 +1,11 @@
 import pymysql
-from database.connection import DataBase
-from models.models import Usuario
+from app.database.connection import DataBase
+from app.models.models import Usuario
 from typing import List, Optional
+from flask_login import UserMixin
 
 
-class UsuarioData(DataBase):
+class UsuarioData(DataBase, UserMixin):
     def __init__(self):
         super().__init__()
 
@@ -12,7 +13,7 @@ class UsuarioData(DataBase):
         self.open()
         try:
             self.cursor.execute(
-                "select * from usuarios where alias=%s and contrasenia =%s", nombre, contrasenia)
+                "select * from usuarios where email=%s and contrasenia =%s", email, contrasenia)
             u = Usuarios(*self.cursor.fetchone().values())
             return u
         except:

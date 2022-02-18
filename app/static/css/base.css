@@ -1,6 +1,6 @@
 body {
     background-color: #f3dbf1;
-    background: linear-gradient(to bottom, #ffdcf3, #827be2) fixed;
+    background: linear-gradient(to bottom, #ffdbf3, #827be2) fixed;
 }
 
 .bg{
@@ -26,3 +26,5 @@ body {
 .card-border:hover{
     transform: scale(1.05);
 }
+
+

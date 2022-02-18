@@ -118,13 +118,14 @@ class UsuarioPlaylist():
         return self.id, self.id_usuario, self.id_playlist, self.tipo_usuario, self.fecha_uso, self.fecha_modificacion, self.fecha_eliminacion
 
 class Usuario():
-    def __init__(self, id:int, alias:str, contrasenia:str, foto_perfil:str, pais:str, id_cuenta: int) -> None:
+    def __init__(self, id:int, alias:str, contrasenia:str, foto_perfil:str, pais:str, id_cuenta: int, email:str) -> None:
         self.id = id
         self.alias = alias
         self.contrasenia = contrasenia
         self.foto_perfil = foto_perfil
         self.pais = pais
         self.id_cuenta = id_cuenta
+        self.email = email
 
     def lst(self) -> Tuple:
-        return self.id, self.alias, self.contrasenia, self.foto_perfil, self.pais, self.id_cuenta
+        return self.id, self.alias, self.contrasenia, self.foto_perfil, self.pais, self.id_cuenta, self.email

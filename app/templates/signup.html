@@ -38,14 +38,16 @@
             <div class="py-2">
                 <span>¿Ya estas registrado? <a href="{{url_for('login')}}">Iniciar sesión</a></span>
                 <div class="col py-3">
-                    <button class="btn btn-outline-secondary">
-                        <div class="row align-items-center">
-                            <div class="col-2 d-none d-md-block">
-                                <img src="/static/img/spotify.png" width="32" alt="Logo de spotify">
+                    <a href="{{ url_for('signupSpotify')}}">
+                        <button class="btn btn-outline-secondary">
+                            <div class="row align-items-center">
+                                <div class="col-2 d-none d-md-block">
+                                    <img src="/static/img/spotify.png" width="32" alt="Logo de spotify">
+                                </div>
+                                <div class="col-10">Registrarse con Spotify</div>
                             </div>
-                            <div class="col-10">Registrarse con Spotify</div>
-                        </div>
-                    </button>
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>
