@@ -1,131 +1,157 @@
-from typing import NamedTuple, Optional
-from datetime import date, time
+from sqlalchemy import Column, Integer, String, Date, Float, Time, Boolean, ForeignKey
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship
 
-"""
-programar todas las clases con sus atributos:
-
-por ejemplo:
+Base = declarative_base()
 
 
-    
-"""
+class Artista(Base):
+    __tablename__ = 'artistas'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    nombre = Column(String(50), nullable=False)
+    popularidad = Column(Float, nullable=False)
+    tipo_artista = Column(Integer, nullable=False)
 
-class Album():
-    def __init__(self, id: int, nombre: str, fechaSalida: date) -> None:
-        self.id = id
-        self.nombre = nombre
-        self.fechaSalida = fechaSalida
-
-    def lst(self) -> tuple:
-        return self.id ,self.nombre, self.fechaSalida
-
-
-class Artista():
-    def __init__(self, id:int, nombre: str, popularidad: float, tipo_artista: str) -> None:
-        self.id = id
-        self.nombre = nombre
-        self.popularidad = popularidad
-        self.tipo_artista = tipo_artista
+    albums = relationship("Album")
+    gen_artist = relationship('GeneroCancion', back_populates='artist_gen')
 
     def lst(self) -> tuple:
         return self.id, self.nombre, self.popularidad, self.tipo_artista
 
-class Cancion():
-    def __init__(self, id:int, titulo:str, pista:str, mood:str, duracion: time, reproducciones: int, 
-    explicita: bool, popularidad: float, tipo_cancion: str, idAlbum: int) -> None:
-        self.id = id
-        self.titulo = titulo
-        self.pista = pista
-        self.mood = mood
-        self.duracion = duracion
-        self.reproducciones = reproducciones
-        self.explicita = explicita
-        self.popularidad = popularidad
-        self.tipo_cancion = tipo_cancion
-        self.idAlbum = idAlbum
-    
-    def lst(self) -> tuple:
-        return self.id, self.titulo, self.pista, self.mood, self.duracion, self.reproducciones, self.explicita,
-        self.popularidad, self.tipo_cancion, self.idAlbum
 
-class Cuenta():
-    def __init__(self, id:int, email: str, explicito:bool, display_name:str, tipo_cuenta:str) -> None:
-        self.id = id
-        self.email = email
-        self.explicito = explicito
-        self.display_name = display_name
-        self.tipo_cuenta = tipo_cuenta
+class Album(Base):
+    __tablename__ = 'albums'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    nombre = Column(String(75), nullable=False)
+    fecha_salida = Column(Date)
+    id_artista = Column(Integer, ForeignKey('artistas.id'))
+    canciones = relationship("Cancion")
+
+    def __repr__(self):
+        return ' {} {} '.format(self.nombre, self.fecha_salida)
+
+
+class Cancion(Base):
+    __tablename__ = 'canciones'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    titulo = Column(String(75), nullable=False)
+    pista = Column(String(75), nullable=False)
+    mood = Column(String(30), nullable=False)
+    duracion = Column(Time, nullable=False)
+    reproducciones = Column(Integer, nullable=False)
+    explicita = Column(Boolean, nullable=False)
+    popularidad = Column(Float, nullable=False)
+    tipo_cancion = Column(String(30), nullable=False)
+    id_album = Column(Integer, ForeignKey('albums.id'), nullable=True)
+
+    g_cancion = relationship('Cancion', back_populates='cancion_g')
+    playl_canciones = relationship('Canciones', back_populates='canciones_playl')
+
+    def __repr__(self):
+        return ' {} {} {} {} {} {} {} {}'.format(self.titulo, self.pista, self.mood, self.duracion,
+                                                 self.reproducciones, self.explicita, self.popularidad,
+                                                 self.tipo_cancion)
+
+
+class Cuenta(Base):
+    __tablename__ = 'cuentas'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    email = Column(String(30))
+    explicito = Column(Boolean, nullable=False)
+    display_name = Column(String(30), nullable=False)
+    tipo_cuenta = Column(Integer, nullable=False)
+
+    cuenta_persona = relationship(Integer, ForeignKey('usuarios.id'))
 
     def lst(self) -> tuple:
         return self.id, self.email, self.explicito, self.display_name, self.tipo_cuenta
 
-class Genero_Cancion():
-    def __init__(self, id:int, id_artista: int, id_cancion: int, id_genero: int, 
-    artista_principal:bool, fecha_publicacion: date) -> None:
-        self.id = id
-        self.id_artista= id_artista
-        self.id_cancion = id_cancion
-        self.id_genero = id_genero
-        self.artista_principal = artista_principal
-        self.fecha_publicacion = fecha_publicacion
+
+class GeneroCancion(Base):
+    __tablename__ = 'generos_canciones'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    id_artista = Column(Integer, ForeignKey('artistas.id'), nullable=False)
+    id_cancion = Column(Integer, ForeignKey('canciones.id'), nullable=False)
+    id_genero = Column(Integer, ForeignKey('generos.id'), nullable=False)
+    artista_principal = Column(Integer, nullable=False)
+    fecha_publicacion = Column(Date, nullable=False)
+
+    artist_gen = relationship('Artista', back_populates='gen_artist')
+    cancion_g = relationship('Cancion', back_populates='g_cancion')
+    gener_c = relationship('Genero', back_populates='c_gener')
 
     def lst(self) -> tuple:
-        return self.id, self.id_artista, self.id_cancion, self.id_genero, 
-        self.artista_principal, self.fecha_publicacion
-    
-class Genero():
-    def __init__(self, id:int, nombre:str, descripcion:str, id_sub_genero:int) ->None:
-        self.id = id
-        self.nombre = nombre
-        self.descripcion = descripcion
-        self.id_sub_genero = id_sub_genero
+        return self.id, self.id_artista, self.id_cancion, self.id_genero, \
+               self.artista_principal, self.fecha_publicacion
+
+
+class Genero(Base):
+    __tablename__ = 'generos'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    nombre = Column(String(30), nullable=False)
+    descripcion = Column(String(75), nullable=True)
+    id_sub_genero = Column(Integer, ForeignKey('generos.id'), nullable=True)
+
+    c_gener = relationship('Genero', back_populates='gener_c')
 
     def lst(self) -> tuple:
         return self.id, self.nombre, self.descripcion, self.id_sub_genero
 
-class Playlist_Cancion():
-    def __init__(self, id: int, id_playlist:int, id_cancion:int, total:int, limite:int) -> None:
-        self.id = id
-        self.id_playlist = id_playlist
-        self.id_cancion = id_cancion
-        self.total = total
-        self.limite = limite
+
+class PlaylistCancion(Base):
+    __tablename__ = 'playlists_canciones'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    id_playlist = Column(Integer, ForeignKey('playlists.id'), nullable=False)
+    id_cancion = Column(Integer, ForeignKey('canciones.id'), nullable=False)
+    total = Column(Integer, nullable=False)
+    limite = Column(Integer, nullable=False)
+
+    canciones_playl = relationship('Canciones', back_populates='playl_canciones')
 
     def lst(self) -> tuple:
         return self.id, self.id_playlist, self.id_cancion, self.total, self.limite
 
-class Playlist():
-    def __init__(self, id:int, nombre:str, fecha_creacion:date, privacidad:bool) -> None:
-        self.id = id
-        self.nombre = nombre
-        self.fecha_creacion = fecha_creacion
-        self.privacidad = privacidad
+
+class Playlist(Base):
+    __tablename__ = 'playlists'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    nombre = Column(String(30), nullable=False)
+    fecha_creacion = Column(Date, nullable=False)
+    privacidad = Column(Boolean, nullable=False)
+
+    usuario_playlist = relationship('Usuario', back_populates='playlist_usuario')
 
     def lst(self) -> tuple:
         return self.id, self.nombre, self.fecha_creacion, self.privacidad
 
-class UsuarioPlaylist():
-    def __init__(self, id:int, id_usuario:int, id_playlist:int, tipo_usuario:str, fecha_uso:date, fecha_modificacion:date, fecha_eliminacion:date)-> None:
-        self.id = id
-        self.id_usuario = id_usuario
-        self.id_playlist = id_playlist
-        self.tipo_usuario = tipo_usuario
-        self.fecha_uso = fecha_uso
-        self.fecha_eliminacion = fecha_eliminacion
-        self.fecha_modificacion = fecha_modificacion
+
+class UsuarioPlaylist(Base):
+    __tablename__ = 'usuarios_playlists'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    id_usuario = Column(Integer, ForeignKey('usuarios.id'), nullable=False)
+    id_playlist = Column(Integer, ForeignKey('playlists.id'), nullable=False)
+    tipo_usuario = Column(Integer, nullable=False)
+    fecha_uso = Column(Date, nullable=True)
+    fecha_modificacion = Column(Date, nullable=True)
+    fecha_eliminacion = Column(Date, nullable=True)
+
+    playlist_usuario = relationship('Playlist', back_populates='usuario_playlist')
 
     def lst(self) -> tuple:
-        return self.id, self.id_usuario, self.id_playlist, self.tipo_usuario, self.fecha_uso, self.fecha_modificacion, self.fecha_eliminacion
+        return self.id, self.id_usuario, self.id_playlist, self.tipo_usuario, \
+               self.fecha_uso, self.fecha_modificacion, self.fecha_eliminacion
 
-class Usuario():
-    def __init__(self, id:int, alias:str, contrasenia:str, foto_perfil:str, pais:str, id_cuenta: int, email:str) -> None:
-        self.id = id
-        self.alias = alias
-        self.contrasenia = contrasenia
-        self.foto_perfil = foto_perfil
-        self.pais = pais
-        self.id_cuenta = id_cuenta
-        self.email = email
+
+class Usuario(Base):
+    __tablename__ = 'usuarios'
+    id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+    alias = Column(String(30), nullable=False)
+    contrasenia = Column(String(30), nullable=False)
+    foto_perfil = Column(String(75), nullable=True)
+    pais = Column(Integer, nullable=False)
+    id_cuenta = Column(Integer, nullable=False)
+    email = Column(String(30), nullable=False)
+    cuenta = relationship("Cuenta")
 
     def lst(self) -> tuple:
         return self.id, self.alias, self.contrasenia, self.foto_perfil, self.pais, self.id_cuenta, self.email
