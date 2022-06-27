@@ -15,8 +15,8 @@ class Artista(Base):
     albums = relationship("Album")
     gen_artist = relationship('GeneroCancion', back_populates='artist_gen')
 
-    def lst(self) -> tuple:
-        return self.id, self.nombre, self.popularidad, self.tipo_artista
+    def __repr__(self):
+        return ' {} {} {} '.format(self.nombre, self.popularidad, self.tipo_artista)
 
 
 class Album(Base):
@@ -63,8 +63,9 @@ class Cuenta(Base):
 
     cuenta_persona = relationship(Integer, ForeignKey('usuarios.id'))
 
-    def lst(self) -> tuple:
-        return self.id, self.email, self.explicito, self.display_name, self.tipo_cuenta
+    def __repr__(self):
+        return ' {} {} {} {} '.format(self.email, self.explicito,
+                                      self.display_name, self.tipo_cuenta)
 
 
 class GeneroCancion(Base):
@@ -80,9 +81,9 @@ class GeneroCancion(Base):
     cancion_g = relationship('Cancion', back_populates='g_cancion')
     gener_c = relationship('Genero', back_populates='c_gener')
 
-    def lst(self) -> tuple:
-        return self.id, self.id_artista, self.id_cancion, self.id_genero, \
-               self.artista_principal, self.fecha_publicacion
+    def __repr__(self):
+        return ' {} {} {} {} {} '.format(self.id_artista, self.id_cancion, self.id_genero,
+                                         self.artista_principal, self.fecha_publicacion)
 
 
 class Genero(Base):
@@ -94,8 +95,8 @@ class Genero(Base):
 
     c_gener = relationship('Genero', back_populates='gener_c')
 
-    def lst(self) -> tuple:
-        return self.id, self.nombre, self.descripcion, self.id_sub_genero
+    def __repr__(self):
+        return ' {} {} '.format(self.nombre, self.descripcion)
 
 
 class PlaylistCancion(Base):
@@ -108,8 +109,8 @@ class PlaylistCancion(Base):
 
     canciones_playl = relationship('Canciones', back_populates='playl_canciones')
 
-    def lst(self) -> tuple:
-        return self.id, self.id_playlist, self.id_cancion, self.total, self.limite
+    def __repr__(self):
+        return ' {} {} {} {}'.format(self.id_playlist, self.id_cancion, self.total, self.limite)
 
 
 class Playlist(Base):
@@ -121,8 +122,8 @@ class Playlist(Base):
 
     usuario_playlist = relationship('Usuario', back_populates='playlist_usuario')
 
-    def lst(self) -> tuple:
-        return self.id, self.nombre, self.fecha_creacion, self.privacidad
+    def __repr__(self):
+        return ' {} {} {} '.format(self.nombre, self.fecha_creacion, self.privacidad)
 
 
 class UsuarioPlaylist(Base):
@@ -137,9 +138,10 @@ class UsuarioPlaylist(Base):
 
     playlist_usuario = relationship('Playlist', back_populates='usuario_playlist')
 
-    def lst(self) -> tuple:
-        return self.id, self.id_usuario, self.id_playlist, self.tipo_usuario, \
-               self.fecha_uso, self.fecha_modificacion, self.fecha_eliminacion
+    def __repr__(self):
+        return ' {} {} {} {} {} {} '.format(self.id_usuario, self.id_playlist, self.tipo_usuario,
+                                            self.fecha_uso, self.fecha_modificacion,
+                                            self.fecha_eliminacion)
 
 
 class Usuario(Base):
@@ -153,5 +155,6 @@ class Usuario(Base):
     email = Column(String(30), nullable=False)
     cuenta = relationship("Cuenta")
 
-    def lst(self) -> tuple:
-        return self.id, self.alias, self.contrasenia, self.foto_perfil, self.pais, self.id_cuenta, self.email
+    def __repr__(self):
+        return ' {} {} {} {} {} {} '.format(self.alias, self.contrasenia, self.foto_perfil,
+                                            self.pais, self.id_cuenta, self.email)
