@@ -1,4 +1,4 @@
-from app.database.db import *
+from app.db import *
 
 
 class NegocioUsuario:
@@ -6,8 +6,8 @@ class NegocioUsuario:
     def __init__(self):
         self.datos = DatosUsuarios()
 
-    def buscar(self, email, password):
-        return self.datos.buscar(email, password)
+    def buscar(self, negocio):
+        return self.datos.buscar(negocio)
 
     def alta(self, user: Usuario):
         try:

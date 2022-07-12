@@ -1,7 +1,7 @@
 from typing import List
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from app.models.models import *
+from app.models import *
 
 
 class Datos:
@@ -54,6 +54,18 @@ class DatosAlbum(Datos):
     def contarAlbums(self) -> int:
         a = self.session.query(Album).count()
         return a
+
+
+class DatosUsuarios(Datos):
+
+    def buscar(self, usuario:Usuario):
+        return self.session.query(Usuario).filter(Usuario.email == usuario.email and
+                                                  Usuario.password == usuario.contrasenia).first()
+
+    def alta(self, user: Usuario) -> Usuario:
+        self.session.add(user)
+        self.session.commit()
+        return user
 
 
 if __name__ == '__main__':
