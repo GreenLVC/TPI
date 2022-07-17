@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, url_for, redirect, session
 from flask_bootstrap import Bootstrap
 
-from app.forms import SignupForm
 from flask_mysqldb import MySQL
 from spotipy.oauth2 import SpotifyOAuth
 import time
@@ -34,7 +33,6 @@ posts = []
 @app.route("/")
 def index():
     return render_template("index.html", num_posts=len(posts))
-
 
 
 @app.route('/signup', methods=['POST', 'GET'])
